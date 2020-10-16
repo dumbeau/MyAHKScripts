@@ -1,11 +1,12 @@
 ﻿;After Effects     A
-;Audacity          5
 ;Acrobat           1
+;Airtable          2
 ;Blender           B
+;Calculator        `
 ;Excel             X
 ;Explorer          E
 ;Fl Studio         F
-;GitHub            G
+;PyCharm           G
 ;iCue              ;
 ;KeePass           K
 ;Illustrator       I
@@ -14,16 +15,17 @@
 ;Messages          M
 ;Notepad           4
 ;Notepad++         N
+;OBS Studio        6
 ;Premiere Pro      D
 ;Photoshop         P
-;Powerpoint        2
+;Powerpoint        3
 ;Slack             C
 ;Spotify           S
 ;ToDo              T
-;Vivaldi           V
+;Chrome            V
+;Visual Studio     H
 ;Window Spy        0
 ;Word              W
-
 
 
 CoordMode, Mouse, Relative
@@ -206,221 +208,98 @@ Return
 ;Acrobat DC
 ;----------
 *1::
-If GetKeyState("Ctrl", "P")
-    {
-    Run, "C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
-	GroupAdd, bgacrobat, ahk_exe Acrobat.exe
-    }
-Else
-    {
-    IfWinNotExist, ahk_exe Acrobat.exe
-        {
-        Run, "C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
-        GroupAdd, bgacrobat, ahk_exe Acrobat.exe
-        Return
-        }
-    GroupAdd, bgacrobat, ahk_exe Acrobat.exe
-    if WinActive("ahk_exe Acrobat.exe")
-        {
-        GroupActivate, bgacrobat, r
-        sleep, 5
-        }
-    else
-        {
-        WinActivate ahk_exe Acrobat.exe
-        }
-    }
+multipleInstanceProgram("C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe", "ahk_exe Acrobat.exe", "bgacrobat")
 Return
 
 ;-------------
 ;After Effects
 ;-------------
 *a::
-If !WinExist("ahk_exe AfterFX.exe")
-	{
-	Run, "C:\Program Files\Adobe\Adobe After Effects CC 2019\Support Files\AfterFX.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe AfterFX.exe
-	}
+singleInstanceProgram("C:\Program Files\Adobe\Adobe After Effects 2020\Support Files\AfterFX.exe", "ahk_exe AfterFX.exe")
 Return
 
 ;--------
-;Audacity
+;Airtable
 ;--------
-*5::
-If !WinExist("ahk_exe audacity.exe")
-	{
-	Run, "C:\Program Files (x86)\Audacity\audacity.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe audacity.exe
-	}
+*2::
+singleInstanceProgram("C:\Users\beaug\AppData\Local\Airtable\app-1.4.2\Airtable.exe", "ahk_exe Airtable.exe")
 Return
-
 
 ;-------
 ;Blender
 ;-------
 *b::
-If !WinExist("ahk_exe blender.exe")
-	{
-	Run, "C:\Program Files\Blender Foundation\blender-2.80 x64\blender.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe blender.exe
-	}
+singleInstanceProgram("C:\Program Files\Blender Foundation\Blender 2.90\blender.exe", "ahk_exe blender.exe")
+Return
+
+;-------
+;Calculator
+;-------
+*`::
+multipleInstanceProgram("calc.exe", "Calculator", "bgcalc")
 Return
 
 ;-----
 ;Excel
 ;-----
 *x::
-If GetKeyState("Ctrl", "P")
-	{
-	Run, "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
-	GroupAdd, bgexcels, ahk_class XLMAIN
-	}
-Else
-	{
-	IfWinNotExist, ahk_class XLMAIN
-		{
-		Run, "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
-		GroupAdd, bgexcels, ahk_class XLMAIN
-		Return
-		}
-	GroupAdd, bgexcels, ahk_class XLMAIN
-	if WinActive("ahk_class XLMAIN")
-		{
-		GroupActivate, bgexcels, r
-		sleep, 5
-		}
-	else
-		{
-		WinActivate ahk_class XLMAIN
-		}
-	}
+multipleInstanceProgram("C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE", "ahk_class XLMAIN", "bgexcels")
 Return
 
 ;--------
 ;Explorer
 ;--------
 *e::
-If GetKeyState("Ctrl", "P")
-	{
-	Run, explorer.exe
-	GroupAdd, bgexplorers, ahk_class CabinetWClass
-	}
-Else
-	{
-	IfWinNotExist, ahk_class CabinetWClass
-		{
-		Run, explorer.exe
-		GroupAdd, bgexplorers, ahk_class CabinetWClass
-		Return
-		}
-	GroupAdd, bgexplorers, ahk_class CabinetWClass
-	if WinActive("ahk_exe explorer.exe")
-		{
-		GroupActivate, bgexplorers, r
-		sleep, 5
-		}
-	else
-		{
-		WinActivate ahk_class CabinetWClass
-		}
-	}
+multipleInstanceProgram("explorer.exe", "ahk_class CabinetWClass", "bgexplorers")
 Return
 
 ;---------
 ;FL Studio
 ;---------
 *f::
-If !WinExist("ahk_class TFruityLoopsMainForm")
-	{
-	Run, "C:\Program Files\Image-Line\FL Studio 20\FL64.exe"
-	}
-Else
-	{
-	WinActivate ahk_class TFruityLoopsMainForm
-	}
+singleInstanceProgram("C:\Program Files\Image-Line\FL Studio 20\FL64.exe", "ahk_class TFruityLoopsMainForm")
 Return
 
 ;---------
-;GitHub
+;VCode
 ;---------
 *g::
-If !WinExist("ahk_exe GitHubDesktop.exe")
-	{
-	Run, "C:\Users\beaug\AppData\Local\GitHubDesktop\app-1.5.1\GitHubDesktop.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe GitHubDesktop.exe
-	}
+singleInstanceProgram("C:\Users\beaug\AppData\Local\Programs\Microsoft VS Code\Code.exe", "ahk_exe Code.exe")
 Return
 
 ;----
 ;iCue
 ;----
 *SC027::
-If !WinExist("ahk_exe iCUE.exe")
-	{
-	Run, "C:\Program Files (x86)\Corsair\CORSAIR iCUE Software\iCUE.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe iCUE.exe
-	}
+singleInstanceProgram("C:\Program Files (x86)\Corsair\CORSAIR iCUE Software\iCUE.exe", "ahk_exe iCUE.exe")
 Return
 
 ;-------
 ;KeePass
 ;-------
 *k::
-If !WinExist("ahk_exe KeePass.exe")
-	{
-	Run, "C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe KeePass.exe
-	}
+singleInstanceProgram("C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe", "ahk_exe KeePass.exe")
 Return
-
-
 
 ;-----------
 ;Illustrator
 ;-----------
 *i::
-If !WinExist("ahk_exe Illustrator.exe")
-	{
-	Run, "C:\Program Files\Adobe\Adobe Illustrator CC 2019\Support Files\Contents\Windows\Illustrator.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe Illustrator.exe
-	}
+singleInstanceProgram("C:\Program Files\Adobe\Adobe Illustrator 2020\Support Files\Contents\Windows\Illustrator.exe", "ahk_exe Illustrator.exe")
 Return
 
-
+;-----------
+;Intelli J
+;-----------
+*j::
+singleInstanceProgram("C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2019.3.2\bin\idea64.exe", "ahk_exe idea64.exe")
+Return
 
 ;--------
 ;Logitech
 ;--------
 *l::
-If !WinExist("ahk_exe LCore.exe")
-	{
-	Run, "C:\Program Files\Logitech Gaming Software\LCore.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe LCore.exe
-	}
+singleInstanceProgram("C:\Program Files\LGHUB\lghub.exe", "ahk_exe lghub.exe")
 Return
 
 
@@ -428,14 +307,7 @@ Return
 ;Media Encoder
 ;-------------
 *q::
-If !WinExist("ahk_exe Adobe Media Encoder.exe")
-	{
-	Run, "C:\Program Files\Adobe\Adobe Media Encoder CC 2019\Adobe Media Encoder.exe"
-	}
-Else
-	{
-	WinActivate ahk_exe Adobe Media Encoder.exe
-	}
+singleInstanceProgram("C:\Program Files\Adobe\Adobe Media Encoder 2020\Adobe Media Encoder.exe", "ahk_exe Adobe Media Encoder.exe")
 Return
 
 
@@ -443,14 +315,7 @@ Return
 ;Messages
 ;--------
 *m::
-If !WinExist("ahk_exe chrome.exe")
-	{
-	Run, chrome.exe "https://messages.android.com/"
-	}
-Else
-	{
-	WinActivate ahk_exe chrome.exe
-	}
+singleInstanceProgram("C:\Users\beaug\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Messages.lnk", "Messages for web")
 Return
 
 
@@ -458,272 +323,191 @@ Return
 ;Notepad
 ;-------
 *4::
-If GetKeyState("Ctrl", "P")
-	{
-	Run, notepad.exe
-	GroupAdd, bgnotepads, ahk_class Notepad
-	}
-Else
-	{
-	IfWinNotExist, ahk_class Notepad
-		{
-		Run, notepad.exe
-		GroupAdd, bgnotepads, ahk_class Notepad
-		Return
-		}
-	GroupAdd, bgnotepads, ahk_class Notepad
-	if WinActive("ahk_class Notepad")
-		{
-		GroupActivate, bgnotepads, r
-		sleep, 5
-		}
-	else
-		{
-		WinActivate ahk_class Notepad
-		}
-	}
+; multipleInstanceProgram("notepad.exe", "ahk_class Notepad", "bgnotepads")
+multipleInstanceProgram("C:\Users\beaug\Documents\AutoHotKey Scripts\General\UWPShortcuts\Notepads.lnk", "Notepads", "bgnotepads")
 Return
 
-;---------
+
 ;Notepad++
-;---------
 *n::
-If GetKeyState("Ctrl", "P")
-	{
-	Run, notepad++.exe
-	GroupAdd, bgnoteplus, ahk_class Notepad++
-	}
-Else
-	{
-	IfWinNotExist, ahk_class Notepad++
-		{
-		Run, notepad++.exe
-		GroupAdd, bgnoteplus, ahk_class Notepad++
-		Return
-		}
-	GroupAdd, bgnoteplus, ahk_class Notepad++
-	if WinActive("ahk_class Notepad++")
-		{
-		GroupActivate, bgnoteplus, r
-		sleep, 5
-		}
-	else
-		{
-		WinActivate ahk_class Notepad++
-		}
-	}
+multipleInstanceProgram("C:\Program Files\Notepad++\notepad++.exe", "ahk_class Notepad++", "bgnoteplus")
 Return
 
-;------------
+
+;OBS Studio
+*6::
+singleInstanceProgram("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit)", "ahk_exe obs64.exe")
+Return
+
+
 ;Premiere Pro
-;------------
 *d::
-If !WinExist("ahk_class Premiere Pro")
-	{
-	Run, "C:\Program Files\Adobe\Adobe Premiere Pro CC 2019\Adobe Premiere Pro.exe"
-	}
-Else
-	{
-	WinActivate ahk_class Premiere Pro
-	}
+singleInstanceProgram("C:\Program Files\Adobe\Adobe Premiere Pro 2020\Adobe Premiere Pro.exe", "ahk_class Premiere Pro")
 Return
 
 
-;---------
+
 ;Photoshop
-;---------
 *p::
-If !WinExist("ahk_class Photoshop")
-	{
-	Run, "C:\Program Files\Adobe\Adobe Photoshop CC 2019\Photoshop.exe"
-	}
-Else
-	{
-	WinActivate ahk_class Photoshop
-	}
+singleInstanceProgram("C:\Program Files\Adobe\Adobe Photoshop 2020\Photoshop.exe", "ahk_class Photoshop")
 Return
 
-;----------
-;Powerpoint
-;----------
-*3::
-If GetKeyState("Ctrl", "P")
-    {
-    Run, "C:\Program Files (x86)\Microsoft Office\root\Office16\POWERPOINT.EXE"
-	GroupAdd, bgpowerpoint, ahk_class PPTFrameClass
-    }
-Else
-    {
-    IfWinNotExist, ahk_class PPTFrameClass
-        {
-        Run, "C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE"
-        GroupAdd, bgpowerpoint, ahk_class PPTFrameClass
-        Return
-        }
-    GroupAdd, bgpowerpoint, ahk_class PPTFrameClass
-    if WinActive("ahk_class PPTFrameClass")
-        {
-        GroupActivate, bgpowerpoint, r
-        sleep, 5
-        }
-    else
-        {
-        WinActivate ahk_class PPTFrameClass
-        }
-    }
-Return
 
-;-------
 ;PureRef
-;-------
+*3::
+singleInstanceProgram("C:\Program Files\PureRef\PureRef.exe", "ahk_exe PureRef.exe")
+return
+
+;Resolve
 *r::
-If GetKeyState("Ctrl", "P")
-    {
-    Run, "C:\Program Files\PureRef\PureRef.exe"
-	GroupAdd, bgpureref, ahk_exe PureRef.exe
-    }
-Else
-    {
-    IfWinNotExist, ahk_exe PureRef.exe
-        {
-        Run, "C:\Program Files\PureRef\PureRef.exe"
-        GroupAdd, bgpureref, ahk_exe PureRef.exe
-        Return
-        }
-    GroupAdd, bgpureref, ahk_exe PureRef.exe
-    if WinActive("ahk_exe PureRef.exe")
-        {
-        GroupActivate, bgpureref, r
-        sleep, 5
-        }
-    else
-        {
-        WinActivate ahk_exe PureRef.exe
-        }
-    }
+singleInstanceProgram("C:\Program Files\Blackmagic Design\DaVinci Resolve\Resolve.exe", "ahk_exe Resolve.exe")
 Return
 
 
-;-----
+
 ;Slack
-;-----
 *c::
-If !WinExist("ahk_exe Slack.exe")
-	{
-	Run, Slack.exe
-	}
-Else
-	{
-	WinActivate ahk_exe Slack.exe
-	}
+singleInstanceProgram("Slack.exe", "ahk_exe Slack.exe")
 Return
 
 
-;-------
 ;Spotify
-;-------
 *s::
-If !WinExist("ahk_exe Spotify.exe")
-	{
-	Run, Spotify.exe
-	}
-Else
-	{
-	WinActivate ahk_exe Spotify.exe
-	}
+singleInstanceProgram("C:\Users\beaug\AppData\Roaming\Spotify\Spotify.exe", "ahk_exe Spotify.exe")
 Return
 
-;-----
+
 ;To Do
-;-----
 *t::
-If !WinExist("Microsoft To-Do")
-	{
-	Run, "%A_ScriptDir%\General\RunTodo.bat"
-	}
-Else
-	{
-	WinActivate Microsoft To-Do
-	}
-Return
+singleInstanceProgram( A_ScriptDir . "\General\RunTodo.bat", "Microsoft To Do")
+return
 
 
-;-------
-;Vivaldi
-;-------
+;Chrome
 *v::
-If GetKeyState("Ctrl", "P")
-	{
-	Run, "C:\Users\beaug\AppData\Local\Vivaldi\Application\vivaldi.exe"
-	GroupAdd, bgvivaldis, ahk_exe vivaldi.exe
-	}
-Else
-	{
-	IfWinNotExist, ahk_exe vivaldi.exe
-		{
-		Run, "C:\Users\beaug\AppData\Local\Vivaldi\Application\vivaldi.exe"
-		GroupAdd, bgvivaldis, ahk_exe vivaldi.exe
-		Return
-		}
-	GroupAdd, bgvivaldis, ahk_exe vivaldi.exe
-	if WinActive("ahk_exe vivaldi.exe")
-		{
-		GroupActivate, bgvivaldis, r
-		sleep, 5
-		}
-	else
-		{
-		WinActivate ahk_exe vivaldi.exe
-		}
-	}
+multipleInstanceProgram("C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", "ahk_exe msedge.exe", "bgchrome")
 Return
 
-;--------
+;Houdini
+*h::
+singleInstanceProgram("C:\Program Files\Side Effects Software\Houdini 18.0.416\bin\houdini.exe", "ahk_exe houdini.exe")
+Return
+
+; Visual Studio
+; *j::
+; singleInstanceProgram("C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe", "ahk_exe devenv.exe")
+; Return
+
+;Unity
+*u::
+singleInstanceProgram("C:\Program Files\Unity\Hub\Editor\2019.2.11f1\Editor\Unity.exe", "ahk_exe Unity.exe")
+return
+
 ;Window Spy
-;--------
 *0::
-If !WinExist("WindowSpy.ahk")
-	{
-	Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-	}
-Else
-	{
-	WinActivate WindowSpy.ahk
-	}
+singleInstanceProgram("C:\Program Files\AutoHotkey\WindowSpy.ahk", "WindowSpy")
+Return
+
+*z::
+singleInstanceProgram("C:\Users\beaug\AppData\Local\Discord\app-0.0.307\Discord.exe", "ahk_exe Discord.exe")
+return
+
+
+;Word
+*w::
+multipleInstanceProgram("C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE", "ahk_class OpusApp", "bgwords")
 Return
 
 
-;----
-;Word
-;----
-*w::
-If GetKeyState("Ctrl", "P")
+;Elan Videomaker
+F11::
+Run, "C:\Users\beaug\beaugilles\Projects\MOJO\Automation\MOBOT\Elan Mobile Pitch\ElanMobilePitch.bat"
+return
+
+;DemoVideoMaker
+F12::
+Run, "C:\Users\beaug\beaugilles\Projects\MOJO\Automation\MOBOT\MBA Demo\RunMBADemo.bat"
+return
+}
+
+
+runEdge(){
+IApplicationActivationManager := ComObjCreate("{45BA127D-10A8-46EA-8AB7-56EA9078943C}", "{2e941141-7f97-4756-ba1d-9decde894a3d}")
+DllCall(NumGet(NumGet(IApplicationActivationManager+0)+3*A_PtrSize), "Ptr", IApplicationActivationManager, "Str", "Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge", "Str", "", "UInt", 0, "IntP", processId)
+ObjRelease(IApplicationActivationManager)
+}
+
+singleInstanceProgram(exePath, ahkHandle){
+If !WinExist(ahkHandle)
 	{
-	Run, "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"
-	GroupAdd, bgwords, ahk_class OpusApp
+	Run, %exePath%
 	}
 Else
 	{
-	IfWinNotExist, ahk_class OpusApp
+	WinActivate, %ahkHandle%
+	}
+Return
+}
+
+multipleInstanceProgram(exePath, ahkHandle, Byref ahkGroup){
+If GetKeyState("Ctrl", "P")
+	{
+	Run, %exePath%
+	GroupAdd, %ahkGroup%, %ahkHandle%
+	}
+Else
+	{
+	If !WinExist(ahkHandle)
 		{
-		Run, "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"
-		GroupAdd, bgwords, ahk_class OpusApp
+		Run, %exePath%
+		GroupAdd, %ahkGroup%, %ahkHandle%
 		Return
 		}
-	GroupAdd, bgwords, ahk_class OpusApp
-	if WinActive("ahk_class OpusApp")
+	GroupAdd, %ahkGroup%, %ahkHandle%
+	if WinActive(ahkHandle)
 		{
-		GroupActivate, bgwords, r
+		GroupActivate, %ahkGroup%, r
 		sleep, 5
 		}
 	else
 		{
-		WinActivate ahk_class OpusApp
+		WinActivate, %ahkHandle%
 		}
 	}
 Return
 }
 
+
+;Microsoft Edge
+; *v::
+; SetTitleMatchMode, 2
+; If GetKeyState("Ctrl", "P")
+	; {
+	; runEdge()
+	; GroupAdd, bgedge, - Microsoft Edge ahk_exe ApplicationFrameHost.exe
+	; }
+; Else
+	; {
+	; If !WinExist("`- Microsoft Edge ahk_exe ApplicationFrameHost.exe")
+		; {
+		; runEdge()
+		; GroupAdd, bgedge, - Microsoft Edge ahk_exe ApplicationFrameHost.exe
+		; Return
+		; }
+	; GroupAdd, bgedge, "`- Microsoft Edge ahk_exe ApplicationFrameHost.exe"
+	; if WinActive("`- Microsoft Edge ahk_exe ApplicationFrameHost.exe")
+		; {
+
+		; GroupActivate, bgedge, r
+		; sleep, 5
+		; }
+	; else
+		; {
+		; WinActivate - Microsoft Edge ahk_exe ApplicationFrameHost.exe
+		; }
+	; }
+; SetTitleMatchMode, 1
+; Return
 
 
 

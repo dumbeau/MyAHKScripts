@@ -32,7 +32,7 @@
 		{
 		If gpress = 0
 			BlockX := 1
-		SendInput, {blind}{SC033}
+		SendInput, {blind}{[}
 		Return
 		}
 
@@ -59,7 +59,7 @@
 		{
 		If gpress = 0
 			BlockX := 1
-		SendInput, {blind}{SC034}
+		SendInput, {blind}{]}
 		Return
 		}
 
